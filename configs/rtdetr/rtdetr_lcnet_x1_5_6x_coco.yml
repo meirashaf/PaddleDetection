@@ -18,5 +18,5 @@ DETR:
 
 LCNet:
   scale: 1.5
-  pretrained: true
+  pretrained: false
   return_idx: [1, 2, 3]
