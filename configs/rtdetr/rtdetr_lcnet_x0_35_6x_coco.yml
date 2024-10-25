@@ -1,0 +1,22 @@
+_BASE_:
+  [
+    "../datasets/coco_detection.yml",
+    "../runtime.yml",
+    "_base_/optimizer_6x.yml",
+    "_base_/rtdetr_r50vd.yml",
+    "_base_/rtdetr_reader.yml",
+  ]
+
+# weights: output/rtdetr_hgnetv2_l_6x_coco/model_final
+weights: /content/PPLCNet_x0_35_pretrained.pdparams
+# pretrain_weights: https://bj.bcebos.com/v1/paddledet/models/pretrained/PPHGNetV2_L_ssld_pretrained.pdparams
+find_unused_parameters: True
+log_iter: 200
+
+DETR:
+  backbone: LCNet
+
+LCNet:
+  scale: 0.35
+  pretrained: true
+  return_idx: [1, 2, 3]
