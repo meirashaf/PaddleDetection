@@ -31,7 +31,7 @@ __all__ = ['LCNet']
 
 NET_CONFIG = {
     "blocks2":
-    #k, in_c, out_c, s, use_se
+    # k, in_c, out_c, s, use_se
     [[3, 16, 32, 1, False], ],
     "blocks3": [
         [3, 32, 64, 2, False],
@@ -131,6 +131,7 @@ class DepthwiseSeparable(nn.Layer):
         x = self.pw_conv(x)
         return x
 
+
 class AdaptiveAvgPool2D(nn.AdaptiveAvgPool2D):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -157,6 +158,7 @@ class AdaptiveAvgPool2D(nn.AdaptiveAvgPool2D):
             return x_mean
         else:
             return super(AdaptiveAvgPool2D, self).forward(x)
+
 
 class SEModule(nn.Layer):
     def __init__(self, channel, reduction=4):
@@ -191,9 +193,10 @@ class SEModule(nn.Layer):
 @register
 @serializable
 class LCNet(nn.Layer):
-    def __init__(self, scale=1.0, feature_maps=[3, 4, 5], act='hard_swish'):
+    def __init__(self, scale=1.0, feature_maps=[3, 4, 5], act='hard_swish', pretrained=''):
         super().__init__()
         self.scale = scale
+        self.pretrained = pretrained
         self.feature_maps = feature_maps
 
         out_channels = []
