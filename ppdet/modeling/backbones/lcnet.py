@@ -193,11 +193,12 @@ class SEModule(nn.Layer):
 @register
 @serializable
 class LCNet(nn.Layer):
-    def __init__(self, scale=1.0, feature_maps=[3, 4, 5], act='hard_swish', pretrained=''):
+    def __init__(self, scale=1.0, feature_maps=[3, 4, 5], act='hard_swish', pretrained='', return_idx=[]):
         super().__init__()
         self.scale = scale
-        self.pretrained = pretrained
         self.feature_maps = feature_maps
+        self.pretrained = pretrained
+        self.return_idx = return_idx
 
         out_channels = []
 
