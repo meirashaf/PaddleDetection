@@ -13,6 +13,8 @@
 # limitations under the License.
 
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 from ppdet.utils.logger import setup_logger
 from ppdet.slim import build_slim_model
 from ppdet.engine.trainer_ssod import Trainer_ARSL
@@ -22,8 +24,6 @@ from ppdet.utils.check import check_gpu, check_version, check_config
 from ppdet.core.workspace import load_config, merge_config
 import paddle
 import warnings
-from __future__ import division
-from __future__ import print_function
 
 import os
 import sys
@@ -102,13 +102,13 @@ def main():
 
     if FLAGS.slim_config:
         cfg = build_slim_model(cfg, FLAGS.slim_config, mode='test')
+    cfg = build_slim_model(cfg, FLAGS.slim_config, mode='test')
 
     # FIXME: Temporarily solve the priority problem of FLAGS.opt
     merge_config(FLAGS.opt)
     check_config(cfg)
     if 'use_gpu' not in cfg:
         cfg.use_gpu = False
-    cfg.use_gpu = False
     check_gpu(cfg.use_gpu)
     check_version()
 
