@@ -13,6 +13,15 @@
 # limitations under the License.
 
 from __future__ import absolute_import
+from ppdet.utils.logger import setup_logger
+from ppdet.slim import build_slim_model
+from ppdet.engine.trainer_ssod import Trainer_ARSL
+from ppdet.engine import Trainer
+from ppdet.utils.cli import ArgsParser
+from ppdet.utils.check import check_gpu, check_version, check_config
+from ppdet.core.workspace import load_config, merge_config
+import paddle
+import warnings
 from __future__ import division
 from __future__ import print_function
 
@@ -24,18 +33,9 @@ parent_path = os.path.abspath(os.path.join(__file__, *(['..'] * 2)))
 sys.path.insert(0, parent_path)
 
 # ignore warning log
-import warnings
 warnings.filterwarnings('ignore')
 
-import paddle
-from ppdet.core.workspace import load_config, merge_config
-from ppdet.utils.check import check_gpu, check_version, check_config
-from ppdet.utils.cli import ArgsParser
-from ppdet.engine import Trainer
-from ppdet.engine.trainer_ssod import Trainer_ARSL
-from ppdet.slim import build_slim_model
 
-from ppdet.utils.logger import setup_logger
 logger = setup_logger('export_model')
 
 
@@ -106,8 +106,8 @@ def main():
     # FIXME: Temporarily solve the priority problem of FLAGS.opt
     merge_config(FLAGS.opt)
     check_config(cfg)
-    if 'use_gpu' not in cfg:
-        cfg.use_gpu = False
+    # if 'use_gpu' not in cfg:
+    cfg.use_gpu = False
     check_gpu(cfg.use_gpu)
     check_version()
 
