@@ -15,15 +15,6 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-from ppdet.utils.logger import setup_logger
-from ppdet.slim import build_slim_model
-from ppdet.engine.trainer_ssod import Trainer_ARSL
-from ppdet.engine import Trainer
-from ppdet.utils.cli import ArgsParser
-from ppdet.utils.check import check_gpu, check_version, check_config
-from ppdet.core.workspace import load_config, merge_config
-import paddle
-import warnings
 
 import os
 import sys
@@ -33,9 +24,18 @@ parent_path = os.path.abspath(os.path.join(__file__, *(['..'] * 2)))
 sys.path.insert(0, parent_path)
 
 # ignore warning log
+import warnings
 warnings.filterwarnings('ignore')
 
+import paddle
+from ppdet.core.workspace import load_config, merge_config
+from ppdet.utils.check import check_gpu, check_version, check_config
+from ppdet.utils.cli import ArgsParser
+from ppdet.engine import Trainer
+from ppdet.engine.trainer_ssod import Trainer_ARSL
+from ppdet.slim import build_slim_model
 
+from ppdet.utils.logger import setup_logger
 logger = setup_logger('export_model')
 
 
